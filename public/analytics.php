@@ -7,7 +7,7 @@ require "vendor/autoload.php";
 \header("Access-Control-Allow-Methods: POST,GET,OPTIONS,PUT,DELETE");
 \header("Content-Type: application/json");
 
-$client = new \Predis\Client();
+$client = new \Predis\Client(\getenv("REDISCLOUD_URL"));
 $client->sadd(
     "analytics", 
     \json_encode(
