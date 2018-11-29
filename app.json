@@ -1,0 +1,8 @@
+
+{
+    "name": "GraphJS-Analytics",
+    "description": "Analytics for GraphJS",
+    "repository": "https://github.com/phonetworks/graphjs-analytics",
+    "addons": ["rediscloud"],
+    "env": {}
+}
