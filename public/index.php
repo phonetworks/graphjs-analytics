@@ -24,6 +24,32 @@ $client->sadd(
     )
 );
 
+$last = $client->scard("analytics");
+$cut = getenv("CUT");
+
+if($last/$cut>1) {
+    $house_analytics = (null !== getenv("HOUSE_ANALYTICS")) ? getenv("HOUSE_ANALYTICS") : [];
+    $mdb = new \MeekroDB('localhost', 'username', 'password');
+    $members = $client->smembers("analytics");
+    $members_count = count($members);
+    $client->spop("analytics", $members_count);
+    foreach($members as $member)
+    {
+        if(
+            !isset($member["public_id"]) ||
+            in_array($member["public_id"], [])
+        )
+            continue;
+
+        $mdb->insert("analytics", [
+            "id"   => DB::sqleval("UUID_TO_BIN(%s)", $member["public_id"]),
+            "tag"  => $member["tag"],
+            "host" => $member["host"],
+            "time" => $member["time"]
+        ]);
+    }
+}
+
 echo \json_encode(
     ["success"=>true]
 );
