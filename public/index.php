@@ -59,7 +59,7 @@ if($last/$cut>1) {
         if(
             !isset($member["public_id"]) || // not set
             (\strlen($member["public_id"])!=36) || // not valid
-            \in_array($member["public_id"], $house_analytics) // house account
+            \preg_grep("/{$member["public_id"]}/i", $house_analytics) // house account
         ) {
             error_log("skipping because ".isset($member["public_id"]). " - ".\strlen($member["public_id"])." - ".\in_array($member["public_id"], $house_analytics));
             continue;
