@@ -67,7 +67,7 @@ if($last/$cut>1) {
                 "id"   => $member["public_id"],
                 "tag"  => $member["tag"],
                 "host" => $member["host"],
-                "time" => \MeekroDB::sqleval("FROM_UNIXTIME(%d)", $member["time"])
+                "time" => \DB::sqleval("FROM_UNIXTIME(%d)", $member["time"])
             ]);
         }
         catch(\Exception $e) {
