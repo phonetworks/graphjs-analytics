@@ -67,7 +67,7 @@ if($last/$cut>1) {
                 "id"   => $member["public_id"],
                 "tag"  => $member["tag"],
                 "host" => $member["host"],
-                "time" => $member["time"]
+                "time" => $mdb::sqleval("FROM_UNIXTIME(%s)", $member["time"])
             ]);
         }
         catch(\Exception $e) {
