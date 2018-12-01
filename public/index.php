@@ -52,6 +52,7 @@ if($last/$cut>1) {
     error_log("Member count:".$members_count);
     foreach($members as $member)
     {
+        $member = json_decode($member, true);
         error_log(print_r($member, true));
         if(
             !isset($member["public_id"]) || // not set

@@ -24,7 +24,7 @@ for($i=0;$i<200; $i++) {
         . "&tag=graphjs-" . $words[rand(0, 6)]
         . "&host=" . $urls[rand(0, 6)]
     );
-    if($i!=0&&$i%10==0)
-        sleep(180);
+    //if($i!=0&&$i%10==0)
+//        sleep(180);
     sleep(1);
 }
