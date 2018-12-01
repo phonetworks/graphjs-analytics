@@ -29,7 +29,6 @@ $cut = getenv("CUT");
 
 if($last/$cut>1) {
     $house_analytics = (\getenv("HOUSE_ANALYTICS")!==false) ? \explode(':', \getenv("HOUSE_ANALYTICS")) : [];
-    error_log(print_r($member, true));
     error_log(print_r($house_analytics, true));
     $mdb = new \MeekroDB(
         \getenv("DB_HOST"), 
@@ -49,8 +48,11 @@ if($last/$cut>1) {
     $members = $client->smembers("analytics");
     $members_count = count($members);
     $client->spop("analytics", $members_count);
+    error_log(print_r($members, true));
+    error_log("Member count:".$members_count);
     foreach($members as $member)
     {
+        error_log(print_r($member, true));
         if(
             !isset($member["public_id"]) || // not set
             !\preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $member["public_id"]) || // not valid
