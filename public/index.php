@@ -14,9 +14,9 @@ $client->sadd(
         \array_merge(
             \array_intersect_key(
                 $_REQUEST, [
-                    "public_id"=>null,
-                    "tag"=>null,
-                    "host"=>null,
+                    "public_id" => null,
+                    "tag"       => null,
+                    "host"      => null,
                 ]
                 ),
             ["time"=>\time()]
@@ -28,25 +28,39 @@ $last = $client->scard("analytics");
 $cut = getenv("CUT");
 
 if($last/$cut>1) {
-    $house_analytics = (null !== getenv("HOUSE_ANALYTICS")) ? getenv("HOUSE_ANALYTICS") : [];
-    $mdb = new \MeekroDB('localhost', 'username', 'password');
+    $house_analytics = (\getenv("HOUSE_ANALYTICS")!==false) ? \explode(':', \getenv("HOUSE_ANALYTICS")) : [];
+    $mdb = new \MeekroDB(
+        \getenv("DB_HOST"), 
+        \getenv('DB_USERNAME'), 
+        \getenv("DB_PASSWORD"),
+        \getenv("DB_DATABASE"),
+        \getenv("DB_PORT")
+    );
+    $mdb->error_handler = false;
+    $mdb->throw_exception_on_error = true;
     $members = $client->smembers("analytics");
     $members_count = count($members);
     $client->spop("analytics", $members_count);
     foreach($members as $member)
     {
         if(
-            !isset($member["public_id"]) ||
-            in_array($member["public_id"], [])
+            !isset($member["public_id"]) || // not set
+            !\preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $member["public_id"]) || // not valid
+            \in_array($member["public_id"], $house_analytics) // house account
         )
             continue;
 
-        $mdb->insert("analytics", [
-            "id"   => DB::sqleval("UUID_TO_BIN(%s)", $member["public_id"]),
-            "tag"  => $member["tag"],
-            "host" => $member["host"],
-            "time" => $member["time"]
-        ]);
+        try {
+            $mdb->insert("analytics", [
+                "id"   => $member["public_id"],
+                "tag"  => $member["tag"],
+                "host" => $member["host"],
+                "time" => $member["time"]
+            ]);
+        }
+        catch(\Exception $e) {
+            \error_log("There was some error with inserting data: ".print_r($member, true));
+        }
     }
 }
 
