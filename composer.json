@@ -2,6 +2,8 @@
     "require": {
         "predis/predis": "^1.1",
         "php-heroku-client/php-heroku-client": "^1.3",
-        "sergeytsalkov/meekrodb": "^2.3"
+        "sergeytsalkov/meekrodb": "^2.3",
+        "fzaninotto/faker": "^1.8",
+        "psy/psysh": "^0.9.9"
     }
 }
