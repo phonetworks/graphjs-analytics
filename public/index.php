@@ -29,7 +29,7 @@ $cut = getenv("CUT");
 
 if($last/$cut>1) {
     $house_analytics = (\getenv("HOUSE_ANALYTICS")!==false) ? \explode(':', \getenv("HOUSE_ANALYTICS")) : [];
-    error_log(print_r($house_analytics, true));
+    //error_log(print_r($house_analytics, true));
     $mdb = new \MeekroDB(
         \getenv("DB_HOST"), 
         \getenv('DB_USERNAME'), 
@@ -37,23 +37,25 @@ if($last/$cut>1) {
         \getenv("DB_DATABASE"),
         \getenv("DB_PORT")
     );
+    /*
     error_log(print_r([ 
         \getenv("DB_HOST"), 
         \getenv('DB_USERNAME'), 
         \getenv("DB_PASSWORD"),
         \getenv("DB_DATABASE"),
         \getenv("DB_PORT")], true));
+    */
     $mdb->error_handler = false;
     $mdb->throw_exception_on_error = true;
     $members = $client->smembers("analytics");
     $members_count = count($members);
     $client->spop("analytics", $members_count);
-    error_log(print_r($members, true));
-    error_log("Member count:".$members_count);
+    //error_log(print_r($members, true));
+    //error_log("Member count:".$members_count);
     foreach($members as $member)
     {
         $member = json_decode($member, true);
-        error_log(print_r($member, true));
+        //error_log(print_r($member, true));
         if(
             !isset($member["public_id"]) || // not set
             (\strlen($member["public_id"])!=36) || // not valid
