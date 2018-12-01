@@ -56,11 +56,12 @@ if($last/$cut>1) {
         error_log(print_r($member, true));
         if(
             !isset($member["public_id"]) || // not set
-            !\preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $member["public_id"]) || // not valid
+            (\strlen($member["public_id"])!=36) || // not valid
             \in_array($member["public_id"], $house_analytics) // house account
-        )
+        ) {
+            error_log("skipping because ".isset($member["public_id"]). " - ".\strlen($member["public_id"])." - ".\in_array($member["public_id"], $house_analytics));
             continue;
-
+        }
         try {
             $mdb->insert("analytics", [
                 "id"   => $member["public_id"],
