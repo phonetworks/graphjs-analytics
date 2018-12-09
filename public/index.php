@@ -77,10 +77,9 @@ if($last/$cut>1) {
         }
     }
 }
-/*
-echo \sprintf("__jp(%s)", 
+
+echo \sprintf("__jp(%s);", 
     \json_encode(
         ["success"=>true]
     )
 );
-*/
