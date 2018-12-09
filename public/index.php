@@ -79,7 +79,7 @@ if($last/$cut>1) {
 }
 
 echo \sprintf("%s(%s);", 
-    $_REQUEST["callback"],
+    $_REQUEST["callback"] ?? "__jp",
     \json_encode(
         ["success"=>true]
     )
