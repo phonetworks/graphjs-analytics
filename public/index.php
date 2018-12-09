@@ -78,6 +78,8 @@ if($last/$cut>1) {
     }
 }
 
-echo \json_encode(
-    ["success"=>true]
+echo \sprintf("__jp(%s)", 
+    \json_encode(
+        ["success"=>true]
+    )
 );
