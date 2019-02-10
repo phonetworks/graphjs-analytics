@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6887f8419316c9d9f92d906123c4cbc9",
+    "content-hash": "1ba9b8a00406ff147d4f1b047db4e038",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -293,6 +293,62 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "josantonius/ip",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Josantonius/PHP-Ip.git",
+                "reference": "d59505b562f43d2c6217066f116498f102319727"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Josantonius/PHP-Ip/zipball/d59505b562f43d2c6217066f116498f102319727",
+                "reference": "d59505b562f43d2c6217066f116498f102319727",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.3 || ^2.8",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.7 || ^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Josantonius\\Ip\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josantonius",
+                    "email": "hello@josantonius.com",
+                    "homepage": "https://josantonius.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP class to get user IP.",
+            "keywords": [
+                "Get user IP",
+                "IP",
+                "REMOTE_ADDR",
+                "hhvm",
+                "php"
+            ],
+            "time": "2018-01-06T18:53:10+00:00"
         },
         {
             "name": "nikic/php-parser",

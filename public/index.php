@@ -2,6 +2,8 @@
 
 require "../vendor/autoload.php";
 
+use Josantonius\Ip\Ip;
+
 \header("Access-Control-Allow-Origin: *");
 \header("Access-Control-Allow-Headers: Content-Type,*");
 \header("Access-Control-Allow-Methods: POST,GET,OPTIONS,PUT,DELETE");
@@ -19,7 +21,10 @@ $client->sadd(
                     "host"      => null,
                 ]
                 ),
-            ["time"=>\time()]
+            [
+                "remote_ip"     => Ip::get(),
+                "time"          => \time()
+            ]
         )
     )
 );
@@ -66,10 +71,11 @@ if($last/$cut>1) {
         }
         try {
             $mdb->insert("analytics", [
-                "id"   => $member["public_id"],
-                "tag"  => $member["tag"],
-                "host" => $member["host"],
-                "time" => \DB::sqleval("FROM_UNIXTIME(%d)", $member["time"])
+                "id"        => $member["public_id"],
+                "tag"       => $member["tag"],
+                "host"      => $member["host"],
+                "time"      => \DB::sqleval("FROM_UNIXTIME(%d)", $member["time"]),
+                "remote_ip" => $member["remote_ip"] ?? null
             ]);
         }
         catch(\Exception $e) {

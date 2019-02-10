@@ -1,8 +1,25 @@
 {
+    "name":        "phonetworks/graphjs-analytics",
+    "description": "Analytics for GraphJS",
+    "keywords": [
+        "phonetworks",
+        "analytics"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Emre Sokullu",
+            "homepage": "https://www.emresokullu.com",
+            "role":     "Developer"
+        }
+    ],
     "require": {
         "predis/predis": "^1.1",
         "php-heroku-client/php-heroku-client": "^1.3",
         "sergeytsalkov/meekrodb": "^2.3",
+        "josantonius/ip": "^1.1"
+    },
+    "require-dev": {
         "fzaninotto/faker": "^1.8",
         "psy/psysh": "^0.9.9"
     }
